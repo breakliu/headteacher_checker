@@ -1,0 +1,78 @@
+<style type="text/css">
+.table_custom thead th, .table_custom tbody td { text-align: center; vertical-align: middle;}
+</style>
+
+<div>
+  <%= form_tag('/search_by_time', :method => :get) do %>
+  <b>学年：</b><%= select_tag "year_id", options_from_collection_for_select(Year.all, "id", "name", params[:year_id]), onchange: "submit()" %>
+  <b>月份：</b><%= select_tag "month_id", options_from_collection_for_select(Month.all, "id", "name", params[:month_id]), onchange: "submit()" %>
+  <% end %>
+</div>
+
+<table class="table table-bordered table-hover table-condensed table_custom">
+  <thead>
+    <tr>
+      <th rowspan="3" width="80px">班级</th>
+      <th rowspan="3" width="50px">班主任</th>
+      <th colspan="6">班级管理平台</th>
+      <th colspan="4">数字化环境管理</th>
+      <th colspan="13">班级文化建设</th>
+    </tr>
+    <tr>
+      <th rowspan="2" colspan="4">班级信息<br/>(周工作计划)</th>
+      <th rowspan="2" width="100px">学生成长记录<br/>(学习生活表现)</th>
+      <th rowspan="2" width="70px">记录栏目<br/>(奖励方面)</th>
+      <th rowspan="2" colspan="4">班级简讯<br/>(每周班级情况小结或<br/>主题活动)</th>
+      <th rowspan="2" width="30px">读书展示</th>
+      <th rowspan="2" width="30px">写字展示</th>
+      <th rowspan="2" width="30px">晨 会</th>
+      <th rowspan="2" width="30px">一分钟礼仪</th>
+      <th rowspan="2" width="30px">墙报建设</th>
+      <th rowspan="2" width="30px">班级卫生</th>
+      <th rowspan="2" width="60px">读书情况</th>
+      <th colspan="3">作业书写<br/>(烂字率)</th>
+      <th colspan="3">作业格式<br/>(不规范率)</th>
+    </tr>
+    <tr>
+      <th width="30px">语文</th>
+      <th width="30px">数学</th>
+      <th width="30px">英语</th>
+      <th width="30px">语文</th>
+      <th width="30px">数学</th>
+      <th width="30px">英语</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @list.posts.each do |post| %>
+    <tr>
+      <td><%= post.gname %></td>
+      <td><%= post.tname %></td>
+      <td><%= post.class_info_1 %></td>
+      <td><%= post.class_info_2 %></td>
+      <td><%= post.class_info_3 %></td>
+      <td><%= post.class_info_4 %></td>
+      <td><%= post.student_growup_record %></td>
+      <td><%= post.mark_column %></td>
+      <td><%= post.class_news_1 %></td>
+      <td><%= post.class_news_2 %></td>
+      <td><%= post.class_news_3 %></td>
+      <td><%= post.class_news_4 %></td>
+      <td><%= post.reading_show %></td>
+      <td><%= post.writing_show %></td>
+      <td><%= post.morning_meeting %></td>
+      <td><%= post.one_min_rite %></td>
+      <td><%= post.wall_newspaper %></td>
+      <td><%= post.class_health %></td>
+      <td><%= post.reading_status %></td>
+      <td><%= post.homework_writing_1 %>%</td>
+      <td><%= post.homework_writing_2 %>%</td>
+      <td><%= post.homework_writing_3 %>%</td>
+      <td><%= post.homework_format_1 %>%</td>
+      <td><%= post.homework_format_2 %>%</td>
+      <td><%= post.homework_format_3 %>%</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%#= link_to 'New List', new_list_path %>

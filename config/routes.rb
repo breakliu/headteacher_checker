@@ -1,4 +1,31 @@
 HeadteacherChecker::Application.routes.draw do
+
+  resources :months
+
+  resources :years
+
+  resources :users
+  resources :sessions
+
+  get "sessions/new"
+  get "users/new"
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+  get "signup" => "users#new", :as => "signup"
+
+  resources :lists
+  get '/search_by_time/' => "lists#index", :as => "search_by_time"
+  get '/search_by_time_admin/' => "lists#index_admin", :as => "search_by_time_admin"
+  get '/index_admin/' => "lists#index_admin", :as => "index_admin"
+  get '/reset_data/' => "lists#reset_data", :as => "reset_data"
+
+  #resources :grades
+  resources :grades do
+    collection { post :sort }
+  end
+
+  resources :posts
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +75,7 @@ HeadteacherChecker::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'lists#index'
 
   # See how all your routes lay out with "rake routes"
 

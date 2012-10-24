@@ -1,0 +1,17 @@
+<h1>班级列表</h1>
+
+<ul class="unstyled" id="grades" data-update-url="<%= sort_grades_url %>">
+<% @grades.each do |grade| %>
+  <%= content_tag_for :li, grade do %>
+    <span class="handle">[ 拖动 ]</span>
+    <%= link_to h(grade.name), grade %>
+    <%= h(grade.teacher_name) %>
+    <%= link_to '编 辑', edit_grade_path(grade), :class => 'btn btn-primary btn-mini' %>
+    <%= link_to '删 除', grade, :class => 'btn btn-danger btn-mini', confirm: '你确认删除？', method: :delete %>
+  <% end %>
+<% end %>
+</ul>
+
+<br />
+
+<%= link_to '新建班级', new_grade_path, :class => 'btn btn-primary' %>
